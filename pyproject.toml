@@ -4,13 +4,16 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "roadspacelab"
-version = "0.1.0"
+version = "0.2.0"
 description = "Open empirical road-space and mixed-traffic research toolkit"
 readme = "README.md"
 requires-python = ">=3.10"
 license = {text = "MIT"}
 authors = [{name = "Road Space Lab contributors"}]
 dependencies = []
+
+[project.scripts]
+roadspace = "roadspacelab.cli:main"
 
 [project.optional-dependencies]
 dev = ["pytest>=8"]
