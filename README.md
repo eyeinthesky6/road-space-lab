@@ -1,8 +1,12 @@
 # Road Space Lab
 
-**Measure roads as dynamic systems, not parking lots.**
+**Open traffic research, datasets, models and tools for measuring real-world road capacity, safety and useful mobility.**
 
 Road Space Lab is an open research-and-software project for testing how much *usable moving-road capacity* different vehicles actually consume under real traffic conditions — especially heterogeneous, weak-lane-discipline traffic such as Indian cities.
+
+It also maintains the **[Road Space Index](resources/README.md)**: a public, license-aware directory of **road traffic datasets, vehicle trajectory data, traffic simulation software, PCU/PCE research, mixed-traffic models, road-safety tools, person-throughput research and taxi/deadheading evidence**.
+
+If you arrived here searching for an **Indian traffic dataset**, **vehicle trajectory dataset**, **traffic simulator**, **Passenger Car Unit (PCU/PCE)** method, **SUMO motorcycle/sublane model**, **traffic safety TTC/PET tool**, **road-space consumption research**, or **ride-hailing congestion/deadheading** evidence, start with the [Road Space Index](resources/README.md).
 
 The project does **not** begin with a conclusion that cars, motorcycles, buses, autos or taxis are inherently better. It begins with a measurement problem:
 
@@ -10,19 +14,37 @@ The project does **not** begin with a conclusion that cars, motorcycles, buses, 
 
 ## What we are building
 
-1. **Reference base** — papers, standards, datasets, open-source software and known limitations.
+1. **Road Space Index** — searchable public directory of papers, standards, datasets, open-source software and known limitations.
 2. **Transparent calculator** — simple queue, headway, signal, braking, occupancy and deadheading calculations with every assumption exposed.
 3. **Trajectory analytics** — longitudinal + lateral motion, effective dynamic space, weaving, braking, conflicts and interaction propagation.
 4. **Model benchmark** — compare fixed PCU, dynamic PCU, speed-area methods, areal-flow models and fully 2-D traffic models against the same observed trajectories.
 5. **Road-Space-Time experiments** — test whether a dynamic territory integrated through time is a useful complement to PCU and static-area measures.
 6. **Person/productivity layer** — keep vehicle flow separate from actual occupancy, passenger-km and empty/deadheading vehicle-km.
-7. **Road resource inventory** — a curated, license-aware directory of datasets, models, simulators, safety tools and research code.
 
 ## Why this exists
 
 Traffic engineering already knows that PCU/PCE values are contextual. Reviews report large variation by traffic composition, road geometry, facility type, speed and driving culture. India’s own Indo-HCM work uses dynamic methods in several contexts. More recent research goes further: lane-free 2-D models and an areal continuum model attempt to avoid forcing heterogeneous traffic into a single fixed passenger-car equivalent.
 
 The gap is less “nobody studied this” and more **the useful pieces are scattered**. Road Space Lab stitches them into one reproducible benchmark and asks the same questions across datasets and models.
+
+## Road Space Index — open road & traffic research directory
+
+The [Road Space Index](resources/README.md) is intended to be useful even if you never run our code. It brings together resources across:
+
+- traffic engineering and road-capacity research;
+- Indian mixed and heterogeneous traffic;
+- vehicle trajectory datasets;
+- motorcycles, two-wheelers and auto-rickshaws;
+- traffic simulation and network models;
+- PCU / PCE / dynamic passenger-car equivalence;
+- road-space and areal-flow models;
+- TTC, PET and surrogate traffic-safety metrics;
+- public transport and person throughput;
+- taxi / ride-hailing deadheading and empty vehicle kilometres;
+- computer vision and traffic-camera analytics;
+- logistics, fleet and mobility research.
+
+The machine-readable catalog is [`resources/catalog.csv`](resources/catalog.csv); the human-readable entry point is [`resources/README.md`](resources/README.md).
 
 ## Core hypotheses — all falsifiable
 
@@ -101,7 +123,7 @@ These formulas are baselines, **not our final traffic model**. The point is to e
 road-space-lab/
 ├── docs/                  methodology and metric definitions
 ├── research/              hypotheses, literature map, model lineage
-├── resources/             datasets/repos/tools inventory
+├── resources/             Road Space Index: datasets/repos/tools/papers
 ├── data/                  download manifests + licensing notes (no giant blobs)
 ├── src/roadspacelab/      transparent calculation/trajectory code
 ├── examples/              runnable scenarios
@@ -121,8 +143,10 @@ No metric gets promoted because it supports our preferred story.
 
 ## Start here
 
+- **[Road Space Index](resources/README.md)** — road traffic datasets, models, standards, simulators and research tools.
 - [`research/research-landscape.md`](research/research-landscape.md) — what has already been done.
 - [`research/model-lineage.md`](research/model-lineage.md) — what we retain, upgrade or reject and why.
+- [`research/problem-matrix.md`](research/problem-matrix.md) — problem-by-problem map of existing science and possible gaps.
 - [`resources/catalog.csv`](resources/catalog.csv) — machine-readable resource inventory.
 - [`docs/methodology.md`](docs/methodology.md) — proposed empirical comparison protocol.
 
