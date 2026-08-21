@@ -1,0 +1,7 @@
+cff-version: 1.2.0
+message: "If you use Road Space Lab, please cite the repository and the upstream datasets/models your analysis depends on."
+title: "Road Space Lab"
+type: software
+version: 0.1.0
+license: MIT
+repository-code: "https://github.com/eyeinthesky6/road-space-lab"
