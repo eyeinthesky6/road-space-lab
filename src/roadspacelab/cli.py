@@ -1,4 +1,4 @@
-"""Small command-line calculator for Road Space Lab boundary models."""
+"""Small command-line calculator for Road Space Lab boundary and baseline models."""
 from __future__ import annotations
 
 import argparse
@@ -11,6 +11,7 @@ from .capacity import (
     queue_slots_1d,
 )
 from .metrics import deadheading_multiplier
+from .pcu import alex_isaac_2015_saturated_pcu
 
 
 def _area_claim(args: argparse.Namespace) -> None:
@@ -50,10 +51,27 @@ def _deadhead(args: argparse.Namespace) -> None:
     print(f"vehicle_km_per_occupied_km={deadheading_multiplier(args.empty_share):.3f}")
 
 
+def _pcu_signal(args: argparse.Namespace) -> None:
+    composition = {
+        "two_wheeler": args.two_wheeler,
+        "three_wheeler": args.three_wheeler,
+        "car": args.car,
+        "bus": args.bus,
+    }
+    result = alex_isaac_2015_saturated_pcu(
+        composition,
+        speed_kmh=args.speed_kmh,
+        approach_width_m=args.width_m,
+    )
+    print("model=Alex & Isaac 2015 saturated dynamic PCU")
+    for vehicle_class, value in result.items():
+        print(f"{vehicle_class}={value:.4f}")
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="roadspace",
-        description="Transparent road-capacity boundary-model calculator",
+        description="Transparent road-capacity and published-baseline calculator",
     )
     sub = parser.add_subparsers(dest="command", required=True)
 
@@ -79,6 +97,18 @@ def build_parser() -> argparse.ArgumentParser:
     deadhead = sub.add_parser("deadhead", help="empty-VKT multiplier")
     deadhead.add_argument("--empty-share", type=float, required=True)
     deadhead.set_defaults(func=_deadhead)
+
+    pcu = sub.add_parser(
+        "pcu-signal",
+        help="reproduce Alex & Isaac (2015) saturated Indian dynamic-PCU model",
+    )
+    pcu.add_argument("--two-wheeler", type=float, required=True, help="traffic proportion [0,1]")
+    pcu.add_argument("--three-wheeler", type=float, required=True, help="traffic proportion [0,1]")
+    pcu.add_argument("--car", type=float, required=True, help="traffic proportion [0,1]")
+    pcu.add_argument("--bus", type=float, required=True, help="traffic proportion [0,1]")
+    pcu.add_argument("--speed-kmh", type=float, required=True)
+    pcu.add_argument("--width-m", type=float, required=True)
+    pcu.set_defaults(func=_pcu_signal)
 
     return parser
 
